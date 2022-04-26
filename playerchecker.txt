@@ -1,0 +1,166 @@
+players = {}
+for i,v in pairs(game:GetService("Players"):GetChildren()) do
+   if v.ClassName == "Player" then
+      table.insert(players, v.Name)
+   end
+end
+
+local items ={"ketchup"}
+local player = game:GetService("Players").LocalPlayer
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Arab Hub | arab#9180", "Midnight")
+local playerchecker = Window:NewTab("Player Checker")
+local psection = playerchecker:NewSection("Player Checker | 80% made by SexLiokSlave#0001")
+local Tab = Window:NewTab("Others")
+local Section = Tab:NewSection("Auto sell")
+
+Section:NewButton("Sell all Ketchup","", function(ketchup)
+    
+    local args = {
+    [1] = "Lots"
+}
+
+game:GetService("ReplicatedStorage").Events.SellKetchup:FireServer(unpack(args))
+
+    
+    end)
+
+
+psection:NewDropdown("Select Player To Check:", "Select the player you want to check",players, function(currentOption)
+if currentOption == currentOption then
+   local Arrow = 0
+   local requiem = 0
+   local Dio = 0
+   local Unusual = 0
+   local Ketchup = 0
+   local Rokakaka = 0
+   local Ultimate = 0
+   local Cursed = 0
+   local Coprse = 0
+   local torso = 0
+   local skull = 0
+   local chargedarrow = 0
+   for _,v in pairs(game:GetService("Players")[currentOption].Backpack:GetChildren()) do
+      if v.Name == "Stand Arrow" then
+         Arrow =  Arrow  + 1
+      elseif v.Name == "Requiem Arrow" then
+         requiem =  requiem  + 1
+      elseif v.Name == "Dio's Diary" then
+         Dio =  Dio  + 1
+      elseif v.Name == "Unusual Arrow" then
+         Unusual = Unusual + 1
+      elseif v.Name == "Ketchup" then
+         Ketchup = Ketchup + 1
+      elseif v.Name == "Rokakaka" then
+         Rokakaka = Rokakaka + 1
+      elseif v.Name == "Ultimate Diary" then
+         Ultimate = Ultimate + 1
+      elseif v.Name == "Cursed Orb" then
+         Cursed = Cursed + 1
+      elseif v.Name == "Saint's Limb" then
+         Coprse = Coprse + 1
+      elseif v.Name == "Saint's Torso" then
+         torso = torso + 1
+      elseif v.Name == "Saint's Skull" then
+         skull = skull + 1
+      elseif v.Name == "Charged Arrow" then
+         chargedarrow = chargedarrow + 1
+      end
+   end
+
+
+   local N = 0
+   for i,v in pairs(game:GetService("Players")[currentOption].Backpack:GetChildren()) do
+      if v:IsA("Tool") then
+         N = N + 1
+      end
+   end
+
+   local A = 0
+   for i,v in pairs(game:GetService("Players"):GetChildren()) do
+      if v.ClassName == "Player" then
+         A = A + 1
+      end
+   end
+
+
+   print("Start Checking...")
+   local data = {
+      ["username"] = "Player Backpack Checker | Lazy Hub";
+      ["content"] = "**[+] Welcome To Player Backpack Checker Notification! "  .. "\n[+] Type Ping: @everyone**",
+      ["embeds"] = {
+         {
+            ["title"] = "**Player Backpack Alert | Lazy Hub**",
+            ["description"] = "-Username: ||" .. game.Players[currentOption].Name  ..
+            "||\n-Equipped Stand: " .. game:GetService("Players")[currentOption].Data.Stand.Value .." ".. game:GetService("Players")[currentOption].Data.Attri.Value ..
+            "\n-Stand Storage 1: ".. game:GetService("Players")[currentOption].Data.Slot1Stand.Value .." ".. game:GetService("Players")[currentOption].Data.Slot1Attri.Value ..
+            "\n-Stand Storage 2: ".. game:GetService("Players")[currentOption].Data.Slot2Stand.Value .." ".. game:GetService("Players")[currentOption].Data.Slot2Attri.Value ..
+            "\n-Stand Storage 3: ".. game:GetService("Players")[currentOption].Data.Slot3Stand.Value .." ".. game:GetService("Players")[currentOption].Data.Slot3Attri.Value ..
+            "\n-------------"..
+            "\n-Level: " .. game:GetService("Players")[currentOption].Data.Level.Value  ..
+            "\n-Current Players Killed: " .. game:GetService("Players")[currentOption].Data.PlayerKills.Value ..
+            "\n-Secondary: " .. game:GetService("Players")[currentOption].Data.Spec.Value .. "\n" ..
+            "-Current Players In Server: "  .. A  ..
+            "\n-Money: " .. game:GetService("Players")[currentOption].Data.Cash.Value ..
+            "\n-------------"..
+            "\n-Charged Arrow: ".. chargedarrow ..
+            "\n-Rokakaka: ".. Rokakaka ..
+            "\n-Dio's Diary: " .. Dio ..
+            "\n-Requiem Arrow: " .. requiem ..
+            "\n-Ketchup: ".. Ketchup ..
+            "\n-ULT Diary: "..Ultimate..
+            "\n-Cursed Orb: "..Cursed..
+            "\n-Saint's Limb: "..Coprse..
+            "\n-Saint's Torso: "..torso..
+            "\nSaint's Skull: "..skull..
+            "\n-Total Items: "  .. N  .. "\n" ..
+            "-Items until full: " .. 500-N .."\n"..
+            "\n-Current "  .. game:GetService("Players").LocalPlayer.PlayerGui.PlayerGUI.ingame.Stats.ST.Text  .. "",
+
+            ["type"] = "rich",
+            ["color"] = tonumber(0x7269da),
+            ["image"] = {
+               ["url"] = "http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username=" .. tostring(game:GetService("Players").LocalPlayer.Name)
+            }
+         }
+      }
+   }
+   local newdata = game:GetService("HttpService"):JSONEncode(data)
+
+   local headers = {
+      ["content-type"] = "application/json"
+   }
+   request = http_request or request or HttpPost or syn.request
+   local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+   request(abcdef)
+   print("Checking Successfully!")
+
+   local StarterGui = game:GetService("StarterGui") -- not sure why you used CoreGui
+   local bindable = Instance.new("BindableFunction")
+
+   function bindable.OnInvoke(response)
+      print(response .. " chosen")
+   end
+
+   StarterGui:SetCore("SendNotification", {
+      Title = "".. currentOption .."'s",
+      Text = "Stats have been sent",
+      Duration = 5,
+      Callback = bindable
+   })
+
+
+end
+end)
+
+
+psection:NewButton("Refresh player list", "Click to refresh player list", function()
+for i,v in pairs(game:GetService("Players"):GetChildren()) do
+   if v.ClassName == "Player" then
+      table.clear(players,v.Name)
+      print("Cleared...")
+      table.insert(players, v.Name)
+   end
+end
+end)
